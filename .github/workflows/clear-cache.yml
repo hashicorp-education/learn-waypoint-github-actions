@@ -1,0 +1,20 @@
+name: Clear cache
+
+on:
+  workflow_dispatch:
+    inputs:
+      hostname:
+        type: string
+        description: Hostname of the running application
+        required: true
+      score:
+        type: string
+        description: Score value to set
+        required: true
+
+jobs:
+  clear-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clear Cache
+        run: 'curl -X PUT ${{ github.event.inputs.hostname }}/score --data "${{ github.event.inputs.score }}"'
